@@ -1,0 +1,120 @@
+# BASE DE CONNAISSANCES RH - ÉDITION PREMIUM 2026
+
+Ce document contient les politiques officielles et procédures de l'entreprise. Il sert de source de vérité pour toutes les questions relatives à l'administration, la paie et les congés.
+
+================================================================================
+CATÉGORIE 1 : CONTRAT DE TRAVAIL & ADMINISTRATION
+================================================================================
+
+--- ACCÈS DOCUMENTAIRE ET CONTRAT ---
+Question : Où puis-je télécharger mon contrat de travail ?
+Réponse : Votre contrat de travail est disponible en téléchargement dans votre "Espace Salarié" sur le coffre-fort numérique de l'entreprise. Il vous suffit d'utiliser vos identifiants personnels pour accéder au dossier "Documents Contractuels".
+
+--- PÉRIODE D'ESSAI ---
+Question : Quelle est la durée de ma période d'essai ?
+Réponse : La durée initiale de la période d'essai est stipulée à l'article 3 de votre contrat. Elle varie selon votre statut (Employé, Cadre, ETAM) et la convention collective. En règle générale : 2 mois pour les employés, 3 mois pour les agents de maîtrise et 4 mois pour les cadres, renouvelable une fois.
+
+--- CHANGEMENT DE COORDONNÉES ---
+Question : Comment modifier mon adresse postale ?
+Réponse : Pour toute mise à jour de vos données personnelles (adresse, téléphone, situation familiale), vous devez remplir le "Formulaire de Modification RH" via l'intranet. Cette validation est nécessaire pour que l'impact soit pris en compte sur vos bulletins de paie et votre dossier administratif.
+
+--- HIÉRARCHIE ET ORGANIGRAMME ---
+Question : Qui est mon responsable hiérarchique N+1 ?
+Réponse : Le nom de votre responsable hiérarchique direct (N+1) est indiqué sur votre fiche de poste. Vous pouvez également consulter l'Organigramme général de l'entreprise ou l'Annuaire Interne pour identifier la structure de votre service.
+
+--- ATTESTATIONS ---
+Question : Puis-je obtenir une attestation employeur ?
+Réponse : Oui. Les attestations d'employeur peuvent être demandées via le portail RH. Le délai de traitement habituel est de 48 heures ouvrées. Le document vous sera transmis sous format PDF par email sécurisé.
+
+--- PASSAGE À TEMPS PARTIEL (Procédure Complexe) ---
+Question : Je souhaite passer à temps partiel, quelle est la procédure ?
+Réponse : Le passage à un temps partiel est une modification contractuelle qui suit 4 étapes clés : 
+1. Demande écrite adressée aux RH par lettre recommandée ou remise en main propre.
+2. Évaluation de la demande par votre manager et le département RH.
+3. Entretien RH pour discuter des modalités (horaires, rémunération).
+4. Signature d'un avenant au contrat si la demande est acceptée, en respectant un délai de prévenance de 3 mois.
+
+--- FIN DE CONTRAT (Procédure Complexe) ---
+Question : Mon contrat arrive à échéance, que se passe-t-il ?
+Réponse : La gestion de fin de contrat dépend de votre situation :
+- Pour un CDD : Un entretien de fin de mission est organisé un mois avant l'échéance pour discuter d'un éventuel renouvellement ou de la rupture définitive.
+- Pour un CDI (Démission/Licenciement) : Les procédures de préavis et de solde de tout compte s'appliquent.
+- Pour l'intérim : Contactez votre agence de référence pour les formalités de fin de mission.
+
+--- MOBILITÉ INTERNE ET ANCIENNETÉ (Procédure Complexe) ---
+Question : Je change de poste en interne, mon ancienneté est-elle conservée ?
+Réponse : En cas de mobilité interne (changement de service ou de poste), l'entreprise confirme la continuité totale de votre ancienneté. Vos droits acquis (jours de congés supplémentaires, primes d'ancienneté, prévoyance) restent inchangés et sont transférés sur votre nouvelle fiche de poste.
+
+
+================================================================================
+CATÉGORIE 2 : PAIE & RÉMUNÉRATION
+================================================================================
+
+--- CALENDRIER DES VIREMENTS ---
+Question : Quand suis-je payé ?
+Réponse : Les salaires sont versés chaque mois le 28. Si le 28 tombe un week-end ou un jour férié, le virement est effectué le jour ouvré précédent. La réception effective sur votre compte dépend des délais de traitement de votre banque (généralement 24h à 48h).
+
+--- ACCÈS AUX BULLETINS DE PAIE ---
+Question : Où trouver mon bulletin de paie ?
+Réponse : Vos bulletins de paie sont archivés légalement sur le "Portail Salarié" sécurisé. Vous pouvez les consulter et les télécharger via le site web ou l'application mobile dédiée à tout moment.
+
+--- VARIATION DU NET ---
+Question : Pourquoi mon salaire net est-il différent ce mois-ci ?
+Réponse : Une variation du salaire net peut s'expliquer par plusieurs facteurs : le paiement d'heures supplémentaires, des absences (maladie/congés sans solde), le versement de primes exceptionnelles ou une modification des taux de cotisations sociales obligatoires.
+
+--- HEURES SUPPLÉMENTAIRES ---
+Question : Comment sont calculées mes heures supplémentaires ?
+Réponse : Les heures supplémentaires sont calculées sur la base des relevés de temps validés par votre manager. Elles font l'objet d'une majoration (selon les seuils légaux et la convention collective) et apparaissent sur une ligne distincte de votre bulletin de paie.
+
+--- CHANGEMENT DE RIB ---
+Question : Puis-je recevoir ma paie sur un autre compte bancaire ?
+Réponse : Oui. Pour modifier vos coordonnées bancaires, envoyez votre nouveau RIB au service RH avant le 15 du mois. Une validation RH est nécessaire pour garantir que le virement du mois en cours se fasse sur le nouveau compte.
+
+--- RETARD DE PAIEMENT (Incident Critique) ---
+Question : Je n'ai pas reçu ma paie à la date prévue, que faire ?
+Réponse : Si vous n'avez pas reçu votre paie 48h après la date habituelle, contactez immédiatement le service paie. Nous vérifierons le statut du virement et identifierons s'il s'agit d'une erreur bancaire ou interne pour vous proposer une solution de dépannage immédiate.
+
+--- ERREUR SUR LE BULLETIN (Rectification) ---
+Question : Mon bulletin de paie comporte une erreur, comment le faire corriger ?
+Réponse : En cas d'erreur constatée, vous devez ouvrir un "Ticket Paie" sur l'intranet en joignant les justificatifs nécessaires. La rectification administrative sera traitée dans les meilleurs délais et une régularisation sera visible sur le bulletin suivant ou via une émission rectificative.
+
+--- PRIMES VARIABLES (Détails) ---
+Question : Comment sont calculées mes primes variables ?
+Réponse : Les primes variables sont calculées selon des critères transparents combinant les objectifs individuels, la performance collective du service et votre ancienneté. Un document détaillant le mode de calcul vous est fourni chaque trimestre. Pour toute question qualitative, orientez-vous vers votre manager.
+
+
+================================================================================
+CATÉGORIE 3 : CONGÉS & ABSENCES
+================================================================================
+
+--- SOLDE DE CONGÉS ---
+Question : Combien de jours de congés me reste-t-il ?
+Réponse : Votre solde actualisé est consultable en temps réel sur l'interface SIRH (Système d'Information des Ressources Humaines). Vous y trouverez le détail des droits acquis, des jours consommés et des jours reportés de l'année précédente.
+
+--- POSER UN CONGÉ ---
+Question : Comment poser un jour de congé ?
+Réponse : Toute demande de congé doit être saisie via l'outil de gestion du temps (Portail RH ou Application mobile). Une fois saisie, la demande est soumise à la validation de votre manager, en respectant le délai de prévenance prévu par le règlement intérieur.
+
+--- JOURS FÉRIÉS ---
+Question : Quels sont les jours fériés chômés dans l'entreprise ?
+Réponse : La liste officielle des jours fériés chômés est disponible sur le calendrier annuel RH. Elle inclut les jours fériés nationaux ainsi que les éventuelles spécificités locales ou conventionnelles accordées par l'entreprise.
+
+--- RÈGLES DE PRISE DE CONGÉS ---
+Question : Puis-je poser mes congés en une seule fois ?
+Réponse : La prise de congés doit respecter la politique interne qui limite généralement la durée maximale d'absence continue. Un accord préalable de la hiérarchie est indispensable pour garantir la continuité des services et respecter les contraintes opérationnelles.
+
+--- ARRÊT MALADIE (Déclaration) ---
+Question : Comment déclarer un arrêt maladie ?
+Réponse : En cas d'absence pour maladie, vous devez prévenir votre manager dans les 4 heures. L'avis d'arrêt de travail doit être transmis au service RH et à la sécurité sociale dans un délai de 48 heures maximum.
+
+--- CONGÉS SANS SOLDE (Exceptionnel) ---
+Question : Je souhaite poser des congés sans solde, est-ce possible ?
+Réponse : Les congés sans solde sont possibles mais restent exceptionnels. Ils nécessitent une demande motivée et une vérification de l'éligibilité (ancienneté, motif). S'ils sont acceptés, ils impacteront proportionnellement votre rémunération et vos droits à congés payés.
+
+--- PROLONGATION MALADIE ---
+Question : Mon arrêt maladie est prolongé, que dois-je faire ?
+Réponse : En cas de prolongation, vous devez transmettre le nouvel avis médical sous 48h. Le service RH gérera l'impact sur la paie, incluant le maintien de salaire si les conditions sont remplies, et préparera votre retour progressif si nécessaire.
+
+--- GESTION DES RTT ---
+Question : Puis-je récupérer des jours de RTT non pris ?
+Réponse : La gestion des compteurs de temps RTT suit une politique de report spécifique. Si les jours n'ont pas été pris avant la date limite annuelle, vérifiez si la monétisation est possible via le Compte Épargne Temps (CET) ou s'ils sont définitivement perdus.

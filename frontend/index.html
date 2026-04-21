@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agent RH Interne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Midnight Aurora Palette */
+            --bg-primary: #050810;
+            --bg-secondary: #0c1120;
+            --bg-hover: #161d31;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            
+            /* Aurora Gradients */
+            --accent-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 50%, #7a5fff 100%);
+            --accent-glow: 0 0 20px rgba(0, 210, 255, 0.3);
+            
+            --success: #10b981;
+            --error: #f43f5e;
+            --warning: #fbbf24;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, #050810 100%);
+            color: var(--text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .app {
+            display: flex;
+            height: 100vh;
+            background: transparent;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: rgba(5, 8, 16, 0.8);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.04em;
+        }
+
+        .features-badge {
+            margin-top: 14px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 500;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .user-info {
+            margin-top: 14px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .user-name {
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .user-role {
+            font-size: 10px;
+            color: #00d2ff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .sidebar-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding: 0 4px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #00d2ff;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--accent-gradient);
+            color: white;
+            font-family: inherit;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--accent-glow);
+            filter: brightness(1.1);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            filter: grayscale(1);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: none;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .upload-zone:hover {
+            border-color: #00d2ff;
+            background: rgba(0, 210, 255, 0.05);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .upload-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .upload-hint {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .source-item {
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+        }
+
+        .source-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+
+        .source-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .source-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .source-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 5px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .source-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-icon:hover {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--error);
+        }
+
+        /* Main Area */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+            min-width: 0;
+            position: relative;
+        }
+
+        .main-header {
+            height: 64px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            flex-shrink: 0;
+            background: rgba(5, 8, 16, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .tab.active {
+            color: #00d2ff;
+            background: rgba(0, 210, 255, 0.1);
+            border-color: rgba(0, 210, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--error);
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages-scroll {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .messages-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px 20px;
+            width: 100%;
+        }
+
+        .message {
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-role {
+            font-size: 13px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 14px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .role-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            box-shadow: var(--accent-glow);
+        }
+
+        .message-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            padding-left: 38px;
+        }
+
+        .message-sources {
+            margin-top: 24px;
+            margin-left: 38px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-sources::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--accent-gradient);
+        }
+
+        .sources-label {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #00d2ff;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .source-chip {
+            display: inline-block;
+            padding: 4px 12px;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .message-excerpts {
+            margin-top: 20px;
+        }
+
+        .excerpt-item {
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+        }
+
+        .excerpt-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 210, 255, 0.3);
+        }
+
+        .excerpt-header {
+            font-size: 11px;
+            font-weight: 700;
+            color: #00d2ff;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .excerpt-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .message-meta {
+            margin-top: 12px;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+
+        /* Empty State */
+        .empty {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            animation: fadeIn 1s ease;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 24px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
+        }
+
+        .empty-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 12px;
+            letter-spacing: -0.04em;
+        }
+
+        .empty-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            opacity: 0.8;
+        }
+
+        /* Input Area */
+        .input-area {
+            border-top: 1px solid var(--border);
+            padding: 24px;
+            flex-shrink: 0;
+            background: rgba(5, 8, 16, 0.4);
+            backdrop-filter: blur(20px);
+        }
+
+        .input-box {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .input-message {
+            width: 100%;
+            min-height: 60px;
+            max-height: 200px;
+            padding: 18px 140px 18px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            color: #fff;
+            font-size: 15px;
+            line-height: 1.5;
+            outline: none;
+            resize: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+        }
+
+        .input-message:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #00d2ff;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
+        }
+
+        .btn-send {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            padding: 10px 24px;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--accent-glow);
+        }
+
+        .btn-send:hover:not(:disabled) {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading */
+        .typing {
+            display: flex;
+            gap: 4px;
+            padding: 4px 0;
+        }
+
+        .typing span {
+            width: 8px;
+            height: 8px;
+            background: var(--text-muted);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        /* Toast */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .toast {
+            padding: 14px 18px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 13px;
+            margin-bottom: 10px;
+            animation: slideInRight 0.3s ease;
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .vizType.option {
+            padding: 8px;
+            font-size: 13px;
+        }
+
+        .vizType.option:disabled {
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .toast.error {
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .toast.info {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.2s;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Auth Screen */
+        .auth-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, #050810 100%);
+        }
+
+        .auth-box {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            padding: 48px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 420px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .auth-logo {
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 8px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.04em;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px;
+            border-radius: 14px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-muted);
+        }
+
+        .auth-tab.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #00d2ff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Stats Dashboard */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Scrollbar */
+        .messages-scroll::-webkit-scrollbar,
+        .sidebar-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .messages-scroll::-webkit-scrollbar-track,
+        .sidebar-body::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .messages-scroll::-webkit-scrollbar-thumb,
+        .sidebar-body::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        .messages-scroll::-webkit-scrollbar-thumb:hover,
+        .sidebar-body::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Badges de confiance */
+        .confidence-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .confidence-badge.reliable {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .confidence-badge.medium {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .confidence-badge.unreliable {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        /* Warning box */
+        .warning-box {
+            padding: 12px;
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            margin: 12px 0;
+            font-size: 13px;
+            color: #92400e;
+        }
+
+        /* Visualization container */
+        .visualization-container {
+            margin-top: 20px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .visualization-container iframe {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            border: none;
+            min-height: 400px;
+        }
+
+        /* Verification details */
+        .verification-details {
+            margin-top: 16px;
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            font-size: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        .verification-details summary {
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding: 4px;
+        }
+
+        .verification-details[open] summary {
+            margin-bottom: 12px;
+        }
+
+        .verification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .verification-item {
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid var(--border-light);
+        }
+
+        .verification-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .verification-value {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Visualization Tab */
+        .viz-controls {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .viz-canvas {
+            background: white;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 0;
+            min-height: 700px;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+        }
+
+        .viz-canvas iframe {
+            flex: 1;
+            border: none;
+            min-height: 700px;
+        }
+
+        .viz-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .viz-placeholder-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* Fix pour Plotly */
+        .visualization-container .plotly,
+        .viz-canvas .plotly {
+            width: 100% !important;
+        }
+
+        .visualization-container .js-plotly-plot,
+        .viz-canvas .js-plotly-plot {
+            width: 100% !important;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Auth Screen -->
+    <div id="authScreen" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">Agent RH Interne</div>
+            <div class="auth-subtitle">Système de recherche intelligent</div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchAuthTab('login')">Connexion</button>
+                <button class="auth-tab" onclick="switchAuthTab('register')">Inscription</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="login(event)">
+                <div class="form-group">
+                    <label class="form-label">Nom d'utilisateur</label>
+                    <input type="text" class="input" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" class="input" name="password" required>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="hidden" onsubmit="register(event)">
+                <div class="form-group">
+                    <label class="form-label">Nom d'utilisateur</label>
+                    <input type="text" class="input" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="input" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mot de passe</label>
+                    <input type="password" class="input" name="password" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Code d'accès (Optionnel)</label>
+                    <input type="text" class="input" name="secret_code" placeholder="Ex: RH-ADMIN">
+                    <small style="color: var(--text-muted); font-size: 11px; display: block; margin-top: 4px;">Laissez vide pour un compte employé standard.</small>
+                </div>
+                <button type="submit" class="btn">S'inscrire</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="mainApp" class="app hidden">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">Agent RH Interne</div>
+                <div class="features-badge">
+                    ANTI-HALLUCINATION<br>
+RÈGLEMENTATIONS<br>
+AGENT RH
+                </div>
+                <div class="user-info">
+                    <div class="user-name" id="userName">Utilisateur</div>
+                    <div class="user-role" id="userRole">user</div>
+                </div>
+            </div>
+
+            <div class="sidebar-body">
+                <!-- Sources Section (Admin Only) -->
+                <div class="section" id="sourceManagementSection">
+                    <div class="section-label">Ajouter des sources</div>
+
+                    <input type="file" id="fileInput" class="hidden" accept=".pdf,.docx,.txt,.csv,.xlsx"
+                        onchange="handleFile()">
+                    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                        <div class="upload-icon">FICHIER</div>
+                        <div class="upload-text">Ajouter un fichier RH</div>
+                        <div class="upload-hint">PDF, DOCX, TXT, CSV, XLSX</div>
+                    </div>
+                    <label class="form-label" style="margin-top: 8px;">Visibilité du document :</label>
+                    <select id="allowedRoles" class="input" style="margin-bottom: 8px;">
+                        <option value="user,manager,rh_admin">Tous les employés</option>
+                        <option value="manager,rh_admin">Managers & RH</option>
+                        <option value="rh_admin">RH Uniquement</option>
+                    </select>
+
+                </div>
+
+                <!-- Active Sources (Admin Only) -->
+                <div class="section" id="activeSourcesSection">
+                    <div class="section-label">Sources actives (<span id="count">0</span>)</div>
+                    <div id="sourcesList"></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <header class="main-header">
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('chat')">Chat</button>
+                    <button class="tab" onclick="switchTab('history')">Historique</button>
+                        
+                </div>
+
+                <div class="header-actions">
+                    <button class="btn-logout" onclick="logout()">Déconnexion</button>
+                </div>
+            </header>
+
+            <!-- Chat Tab -->
+            <div class="content-area" id="chatTab">
+                <div class="messages-scroll" id="chatScroll">
+                    <div class="messages-container" id="chatMessages">
+                        <div class="empty">
+                            <div class="empty-icon">IA</div>
+                            <div class="empty-title">Comment puis-je vous aider ?</div>
+                            <div class="empty-text">Ajoutez des sources et posez vos questions pour obtenir des réponses
+                                précises et sourcées avec vérification de fiabilité</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <div class="input-box">
+                        <textarea id="userInput" class="input-message" placeholder="Posez votre question..." rows="1"
+                            onkeydown="handleKey(event)" oninput="resize(this)"></textarea>
+                        <button class="btn-send" onclick="send()" id="sendBtn">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div class="content-area hidden" id="historyTab">
+                <div class="messages-scroll" id="historyScroll">
+                    <div class="messages-container" id="historyMessages">
+                        <div class="empty">
+                            <div class="empty-icon">H</div>
+                            <div class="empty-title">Aucun historique</div>
+                            <div class="empty-text">Vos conversations apparaîtront ici</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Tab -->
+            <div class="content-area hidden" id="statsTab">
+                <div class="messages-scroll">
+                    <div class="messages-container">
+                        <h2 style="margin-bottom: 24px;">Statistiques d'utilisation</h2>
+                        <div class="stats-grid" id="statsGrid"></div>
+                        <div id="activityChart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualization Tab -->
+            <div class="content-area hidden" id="vizTab">
+                <div class="messages-scroll">
+                    <div class="messages-container">
+                        <h2 style="margin-bottom: 24px;">Visualisation de Données</h2>
+                        <div class="viz-controls">
+                            <div class="section-label">Configuration de la visualisation</div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+                                <div>
+                                    <label class="form-label">Type de graphique</label>
+                                    <select id="vizType" class="input">
+                                        <option value="" disabled selected>Choisir un type de graphique</option>
+                                        <option value="bar">Barres (comparaisons, classements)</option>
+                                        <option value="line">Lignes (évolution dans le temps)</option>
+                                        <option value="area">Aires empilées (cumul, tendances)</option>
+                                        <option value="pie">Camembert (répartition, pourcentages)</option>
+                                        <option value="scatter">Nuage de points (corrélation)</option>
+                                        <option value="bubble">Bulles (3 variables : x, y, taille)</option>
+
+                                        <option value="histogram">Histogramme (distribution)</option>
+                                        <option value="box">Boîtes à moustaches (quartiles)</option>
+                                        <option value="heatmap">Carte de chaleur (matrice)</option>
+
+                                        <option value="funnel">Entonnoir (conversion, étapes)</option>
+                                        <option value="gauge">Jauge (KPI, objectif)</option>
+                                        <option value="waterfall">Cascade (décomposition + / -)</option>
+
+                                        <option value="treemap">Treemap (hiérarchie, parts)</option>
+                                        <option value="sunburst">Sunburst (hiérarchie multiniveau)</option>
+
+                                        <option value="radar">Radar / Spider (profils, compétences)</option>
+                                        <option value="combo">Combiné (barres + ligne, double axe)</option>
+
+                                        <option value="candlestick">Chandelier (bourse OHLC)</option>
+                                        <option value="table">Tableau interactif (données brutes)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label">Source de données</label>
+                                    <select id="vizSource" class="input">
+                                        <option value="">Sélectionnez une source</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn" onclick="generateVisualization()">
+                                Générer la visualisation
+                            </button>
+                        </div>
+                        <div class="viz-canvas" id="vizCanvas">
+                            <div class="viz-placeholder">
+                                <div class="viz-placeholder-icon">V</div>
+                                <div style="font-size: 14px; color: var(--text-muted);">
+                                    Configurez et générez une visualisation
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <div class="toast-container" id="toasts"></div>
+
+    <script>
+        const API = '/api';
+        let token = localStorage.getItem('ia_finder_token');
+        let currentUser = null;
+        let sources = [];
+
+        // ============================================================================
+        // INITIALIZATION
+        // ============================================================================
+
+        init();
+
+        function init() {
+            if (token) {
+                verifyToken();
+            } else {
+                showAuth();
+            }
+        }
+
+        async function verifyToken() {
+            try {
+                const res = await fetchAPI('/auth/me');
+                if (res.success) {
+                    currentUser = res.user;
+                    showApp();
+                    loadSources();
+                } else {
+                    showAuth();
+                }
+            } catch (e) {
+                showAuth();
+            }
+        }
+
+        function showAuth() {
+            document.getElementById('authScreen').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+        }
+
+        function showApp() {
+            document.getElementById('authScreen').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+
+            if (currentUser) {
+                document.getElementById('userName').textContent = currentUser.username;
+                document.getElementById('userRole').textContent = currentUser.role;
+
+                // Masquage de la gestion et de la liste pour les simples utilisateurs
+                const adminSection = document.getElementById('sourceManagementSection');
+                const sourcesSection = document.getElementById('activeSourcesSection');
+
+                if (currentUser.role === 'user') {
+                    adminSection.style.display = 'none';
+                    sourcesSection.style.display = 'none';
+                } else {
+                    adminSection.style.display = 'block';
+                    sourcesSection.style.display = 'block';
+                }
+            }
+        }
+
+        // ============================================================================
+        // AUTHENTICATION
+        // ============================================================================
+
+        function switchAuthTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (tab === 'login') {
+                document.getElementById('loginForm').classList.remove('hidden');
+                document.getElementById('registerForm').classList.add('hidden');
+            } else {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('registerForm').classList.remove('hidden');
+            }
+        }
+
+        async function login(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                username: form.username.value,
+                password: form.password.value
+            };
+
+            try {
+                const res = await fetchAPI('/auth/login', 'POST', data);
+                if (res.success) {
+                    token = res.token;
+                    localStorage.setItem('ia_finder_token', token);
+                    currentUser = res.user;
+                    toast('Connexion réussie', 'success');
+                    showApp();
+                    loadSources();
+                } else {
+                    toast(res.error || 'Erreur de connexion', 'error');
+                }
+            } catch (e) {
+                toast('Erreur de connexion au serveur', 'error');
+            }
+        }
+
+        async function register(e) {
+            e.preventDefault();
+            const form = e.target;
+            const data = {
+                username: form.username.value,
+                email: form.email.value,
+                password: form.password.value,
+                secret_code: form.secret_code.value
+            };
+
+            try {
+                const res = await fetchAPI('/auth/register', 'POST', data);
+                if (res.success) {
+                    token = res.token;
+                    localStorage.setItem('ia_finder_token', token);
+                    currentUser = res.user;
+                    toast('Inscription réussie', 'success');
+                    showApp();
+                    loadSources();
+                } else {
+                    toast(res.error || 'Erreur d\'inscription', 'error');
+                }
+            } catch (e) {
+                toast('Erreur de connexion au serveur', 'error');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('ia_finder_token');
+            token = null;
+            currentUser = null;
+            sources = [];
+            showAuth();
+            toast('Déconnexion réussie', 'info');
+        }
+
+        // ============================================================================
+        // API HELPER
+        // ============================================================================
+
+        async function fetchAPI(endpoint, method = 'GET', body = null) {
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            if (token) {
+                options.headers['Authorization'] = `Bearer ${token}`;
+            }
+
+            if (body && method !== 'GET') {
+                options.body = JSON.stringify(body);
+            }
+
+            const res = await fetch(`${API}${endpoint}`, options);
+            const data = await res.json();
+
+            const isAuthEndpoint = endpoint.startsWith('/auth/login') || endpoint.startsWith('/auth/register');
+            if (res.status === 401 && !isAuthEndpoint) {
+                logout();
+                throw new Error('Session expirée');
+            }
+
+            return data;
+        }
+
+        // ============================================================================
+        // SOURCES MANAGEMENT
+        // ============================================================================
+
+        async function loadSources() {
+            try {
+                const res = await fetchAPI('/sources');
+                if (res.success) {
+                    sources = res.sources;
+                    renderSources();
+                    updateVizSources();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function renderSources() {
+            const list = document.getElementById('sourcesList');
+            document.getElementById('count').textContent = sources.length;
+
+            const activeSources = sources.filter(s => !s.is_archived);
+            const archivedSources = sources.filter(s => s.is_archived);
+
+            if (sources.length === 0) {
+                list.innerHTML = '<div style="text-align:center;padding:20px 0;color:var(--text-muted);font-size:12px">Aucune source</div>';
+                return;
+            }
+
+            let html = '';
+
+            if (activeSources.length > 0) {
+                html += activeSources.map(s => renderSourceItem(s)).join('');
+            }
+
+            if (archivedSources.length > 0) {
+                html += `
+                    <div style="margin: 20px 0 10px 0; padding-top:10px; border-top:1px solid var(--border-light); font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">
+                        📦 Archives (${archivedSources.length})
+                    </div>
+                `;
+                html += archivedSources.map(s => renderSourceItem(s)).join('');
+            }
+
+            list.innerHTML = html;
+        }
+
+        function renderSourceItem(s) {
+            const date = new Date(s.last_updated).toLocaleDateString('fr-FR');
+            const badge = getBadgeColor(s.type);
+            const isStructured = s.metadata && (s.metadata.format === 'csv' || s.metadata.format === 'xlsx' || s.metadata.format === 'xls');
+
+            const opacityStyle = s.is_archived ? 'opacity: 0.6; background: #f9fafb;' : '';
+
+            // Actions réservées aux Admin/Manager
+            let actionButtons = '';
+            if (currentUser && currentUser.role !== 'user') {
+                const archiveBtn = s.is_archived
+                    ? `<button class="btn-icon" onclick="unarchiveSource('${s.id}')" title="Désarchiver">📂</button>`
+                    : `<button class="btn-icon" onclick="archiveSource('${s.id}')" title="Archiver">📦</button>`;
+                
+                const configBtn = !s.is_archived
+                    ? `<button class="btn-icon" onclick="event.stopPropagation(); configureArchive('${s.id}', ${s.auto_archive_days || 'null'})" title="Auto-archivage" style="font-size: 14px;">⚙️</button>`
+                    : '';
+
+                actionButtons = `
+                    <div class="source-actions">
+                        ${configBtn}
+                        ${archiveBtn}
+                        <button class="btn-icon btn-delete" onclick="deleteSource('${s.id}')" title="Supprimer">✕</button>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="source-item" style="${opacityStyle}">
+                    <div class="source-info" onclick="showSourceDetails('${s.id}')" style="cursor: pointer;">
+                        <div class="source-name" title="${s.name}">
+                            <span class="source-badge" style="background: ${badge}">${s.type.toUpperCase()}</span>
+                            ${truncate(s.name, 50)}
+                            ${isStructured ? '<span style="margin-left: 6px; font-size: 10px; background: #0d8f6f; color: white; padding: 2px 6px; border-radius: 3px;">DATA</span>' : ''}
+                        </div>
+                        <div class="source-meta">${date}${s.auto_archive_days ? ' · ⏱ Auto-archive: ' + s.auto_archive_days + 'j' : ''}</div>
+                    </div>
+                    ${actionButtons}
+                </div>
+            `;
+        }
+
+        async function showSourceDetails(id) {
+            const s = sources.find(src => src.id === id);
+            if (!s) return;
+            let metadataHtml = '';
+            if (s.metadata) {
+                try {
+                    const meta = typeof s.metadata === 'string' ? JSON.parse(s.metadata) : s.metadata;
+                    if (meta.size) {
+                        const size = parseInt(meta.size);
+                        meta.size = size > 1024 * 1024 ? (size / (1024 * 1024)).toFixed(2) + ' MB' : (size / 1024).toFixed(2) + ' KB';
+                    }
+                    metadataHtml = Object.entries(meta).map(([k, v]) =>
+                        `<div style="margin-bottom: 4px;"><strong>${k}:</strong> ${v}</div>`
+                    ).join('');
+                } catch (e) {
+                    metadataHtml = 'Non disponible';
+                }
+            }
+            const content = `
+                <div style="padding: 20px;">
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">Nom</label>
+                        <div class="input" style="background: #f9fafb;">${s.name}</div>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">Type</label>
+                        <div class="input" style="background: #f9fafb;">${s.type.toUpperCase()}</div>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">Date d'ajout</label>
+                        <div class="input" style="background: #f9fafb;">${new Date(s.last_updated).toLocaleString()}</div>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">Métadonnées</label>
+                        <div style="background: #f9fafb; padding: 10px; border-radius: 6px; font-size: 13px; border: 1px solid var(--border-light);">
+                            ${metadataHtml || 'Aucune métadonnée'}
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label class="form-label">Auto-archivage</label>
+                        <div class="input" style="background: #f9fafb;">${s.auto_archive_days ? s.auto_archive_days + ' jours après ajout' : 'Désactivé'}</div>
+                    </div>
+                    ${s.is_archived ? '<div style="color: var(--text-muted); font-style: italic; font-size: 12px;">Ce fichier est archivé.</div>' : ''}
+                </div>
+            `;
+            document.getElementById('sourceDetailsContent').innerHTML = content;
+            document.getElementById('sourceDetailsModal').classList.remove('hidden');
+        }
+
+        function closeSourceDetailsModal() {
+            document.getElementById('sourceDetailsModal').classList.add('hidden');
+        }
+
+        async function refreshSource(id) {
+            try {
+                toast('Actualisation...', 'info');
+                const res = await fetchAPI(`/sources/${id}/refresh`, 'POST');
+                if (res.success) {
+                    const insights = res.insights;
+
+                    // GÉNÉRATION DU TABLEAU HTML
+                    let tableHTML = `
+                        <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                            <h2 style="margin: 0 0 20px 0; color: #0d0d0d; font-size: 24px; font-weight: 700; display: flex; align-items: center; gap: 12px;">
+                                <span>Analyse de ${insights.name}</span>
+                            </h2>
+                            
+                            <!-- Dimensions -->
+                            <div style="background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%); color: white; padding: 16px 20px; border-radius: 8px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <div style="font-size: 14px; opacity: 0.9; margin-bottom: 4px;">Dimensions</div>
+                                    <div style="font-size: 24px; font-weight: 700;">${insights.shape.rows.toLocaleString()} lignes × ${insights.shape.columns} colonnes</div>
+                                </div>
+                                <div style="font-size: 48px; opacity: 0.3;">V</div>
+                            </div>
+        `;
+
+                    // TABLEAU STATISTIQUES
+                    if (Object.keys(insights.statistics).length > 0) {
+                        tableHTML += `
+                            <h3 style="margin: 24px 0 16px 0; color: #0d0d0d; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                                <span>Statistiques descriptives</span>
+                            </h3>
+            <div style="overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 8px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <thead>
+                        <tr style="background: #f7f7f8;">
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Colonne</th>
+                            <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Total</th>
+                            <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Moyenne</th>
+                            <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Min</th>
+                            <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Max</th>
+                            <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Écart-type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        `;
+
+                        let rowIndex = 0;
+                        for (const [col, stats] of Object.entries(insights.statistics)) {
+                            const bgColor = rowIndex % 2 === 0 ? '#ffffff' : '#f9fafb';
+                            tableHTML += `
+                        <tr style="background: ${bgColor}; transition: background 0.2s;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='${bgColor}'">
+                            <td style="padding: 12px 16px; font-weight: 600; color: #0d0d0d; border-bottom: 1px solid #e5e7eb;">${col}</td>
+                            <td style="padding: 12px 16px; text-align: right; color: var(--accent); font-weight: 500; border-bottom: 1px solid #e5e7eb;">${stats.total.toLocaleString('fr-FR', { maximumFractionDigits: 2 })}</td>
+                            <td style="padding: 12px 16px; text-align: right; color: var(--accent); border-bottom: 1px solid #e5e7eb;">${stats.mean.toLocaleString('fr-FR', { maximumFractionDigits: 2 })}</td>
+                            <td style="padding: 12px 16px; text-align: right; color: var(--accent); border-bottom: 1px solid #e5e7eb;">${stats.min.toLocaleString('fr-FR', { maximumFractionDigits: 2 })}</td>
+                            <td style="padding: 12px 16px; text-align: right; color: var(--accent); border-bottom: 1px solid #e5e7eb;">${stats.max.toLocaleString('fr-FR', { maximumFractionDigits: 2 })}</td>
+                            <td style="padding: 12px 16px; text-align: right; color: #6b7280; border-bottom: 1px solid #e5e7eb;">${stats.std.toLocaleString('fr-FR', { maximumFractionDigits: 2 })}</td>
+                        </tr>
+                        `;
+                            rowIndex++;
+                        }
+
+                        tableHTML += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+                    }
+
+                    // TABLEAU TENDANCES
+                    if (Object.keys(insights.trends).length > 0) {
+                        tableHTML += `
+            <h3 style="margin: 24px 0 16px 0; color: #0d0d0d; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <span>Tendances temporelles</span>
+                            </h3>
+            <div style="overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 8px;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                    <thead>
+                        <tr style="background: #f7f7f8;">
+                            <th style="padding: 12px 16px; text-align: left; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Colonne</th>
+                            <th style="padding: 12px 16px; text-align: center; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Direction</th>
+                            <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Variation (%)</th>
+                            <th style="padding: 12px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Pente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        `;
+
+                        let trendIndex = 0;
+                        for (const [col, trend] of Object.entries(insights.trends)) {
+                            const bgColor = trendIndex % 2 === 0 ? '#ffffff' : '#f9fafb';
+                            const directionIcon = trend.direction === 'croissante' ? '▲' : '▼';
+                            const directionColor = trend.direction === 'croissante' ? 'var(--accent)' : 'var(--error)';
+                            const percentColor = trend.percentage_change >= 0 ? 'var(--accent)' : 'var(--error)';
+                            const percentSign = trend.percentage_change >= 0 ? '+' : '';
+
+                            tableHTML += `
+                        <tr style="background: ${bgColor}; transition: background 0.2s;" onmouseover="this.style.background='#f0f9ff'" onmouseout="this.style.background='${bgColor}'">
+                            <td style="padding: 12px 16px; font-weight: 600; color: #0d0d0d; border-bottom: 1px solid #e5e7eb;">${col}</td>
+                            <td style="padding: 12px 16px; text-align: center; border-bottom: 1px solid #e5e7eb;">
+                                <span style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; background: ${directionColor}15; color: ${directionColor}; border-radius: 12px; font-weight: 600; font-size: 12px;">
+                                    ${directionIcon} ${trend.direction}
+                                </span>
+                            </td>
+                            <td style="padding: 12px 16px; text-align: right; color: ${percentColor}; font-weight: 600; border-bottom: 1px solid #e5e7eb;">
+                                ${percentSign}${trend.percentage_change.toFixed(2)}%
+                            </td>
+                            <td style="padding: 12px 16px; text-align: right; color: #6b7280; font-size: 12px; border-bottom: 1px solid #e5e7eb;">
+                                ${trend.slope.toFixed(4)}
+                            </td>
+                        </tr>
+                        `;
+                            trendIndex++;
+                        }
+
+                        tableHTML += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+                    }
+
+                    // TABLEAU TOP VALEURS
+                    if (Object.keys(insights.top_values).length > 0) {
+                        tableHTML += `
+            <h3 style="margin: 24px 0 16px 0; color: #0d0d0d; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                <span>Top 10 des valeurs</span>
+                            </h3>
+            `;
+
+                        for (const [col, values] of Object.entries(insights.top_values)) {
+                            tableHTML += `
+            <h4 style="margin: 16px 0 12px 0; color: #565869; font-size: 14px; font-weight: 600;">${col}</h4>
+                <div style="overflow-x: auto; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 16px;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+                        <thead>
+                            <tr style="background: #f7f7f8;">
+                                <th style="padding: 10px 16px; text-align: left; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb; width: 60px;">Rang</th>
+                                <th style="padding: 10px 16px; text-align: left; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Label</th>
+                                <th style="padding: 10px 16px; text-align: right; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb;">Valeur</th>
+                                <th style="padding: 10px 16px; text-align: left; font-weight: 600; color: #565869; border-bottom: 2px solid #e5e7eb; width: 200px;">Barre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            `;
+
+                            const maxValue = Math.max(...values.slice(0, 10).map(v => v.value));
+
+                            values.slice(0, 10).forEach((item, idx) => {
+                                const bgColor = idx % 2 === 0 ? '#ffffff' : '#f9fafb';
+                                const barWidth = (item.value / maxValue) * 100;
+                                const rankDisplay = `${idx + 1}`;
+
+                                tableHTML += `
+                            <tr style="background: ${bgColor};">
+                                <td style="padding: 10px 16px; text-align: center; font-size: 16px; border-bottom: 1px solid #e5e7eb;">${rankDisplay}</td>
+                                <td style="padding: 10px 16px; font-weight: 500; color: #0d0d0d; border-bottom: 1px solid #e5e7eb;">${item.label}</td>
+                                <td style="padding: 10px 16px; text-align: right; font-weight: 600; color: var(--accent); border-bottom: 1px solid #e5e7eb;">${item.value.toLocaleString('fr-FR', { maximumFractionDigits: 2 })}</td>
+                                <td style="padding: 10px 16px; border-bottom: 1px solid #e5e7eb;">
+                                    <div style="background: #e5e7eb; border-radius: 4px; height: 20px; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, var(--accent) 0%, var(--accent-hover) 100%); height: 100%; width: ${barWidth}%; border-radius: 4px; transition: width 0.3s;"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            `;
+                            });
+
+                            tableHTML += `
+                        </tbody>
+                    </table>
+                </div>
+        `;
+                        }
+                    }
+
+                    tableHTML += `</div>`;
+
+                    addMsg('INSIGHTS', tableHTML);
+                    switchTab('chat');
+                    toast('Insights affichés', 'success');
+                } else {
+                    toast(res.error || 'Erreur', 'error');
+                }
+            } catch (e) {
+                toast('Erreur de connexion', 'error');
+                console.error(e);
+            }
+        }
+
+        function getBadgeColor(type) {
+            return 'var(--accent)';
+        }
+
+        function truncate(text, length) {
+            return text.length > length ? text.substring(0, length) + '...' : text;
+        }
+
+        async function handleFile() {
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) return;
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('allowed_roles', 'rh_admin');
+            try {
+                toast('Upload en cours...', 'info');
+                const res = await fetch(`${API}/sources/file`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.success) {
+                    toast('Fichier ajouté avec succès', 'success');
+                    loadSources();
+                    document.getElementById('fileInput').value = '';
+                } else toast(data.error, 'error');
+            } catch (e) { toast('Erreur lors de l\'upload', 'error'); }
+        }
+
+        async function addWeb() {
+            const url = document.getElementById('urlInput').value.trim();
+            if (!url) return toast('Entrez une URL', 'error');
+
+            try {
+                toast('Récupération du site...', 'info');
+                const res = await fetchAPI('/sources/web', 'POST', { url, update_frequency: 0 });
+
+                if (res.success) {
+                    toast('Site web ajouté avec succès', 'success');
+                    loadSources();
+                    document.getElementById('urlInput').value = '';
+                } else {
+                    toast(res.error, 'error');
+                }
+            } catch (e) {
+                toast('Erreur lors de l\'ajout', 'error');
+            }
+        }
+
+        function showDatabaseModal() {
+            document.getElementById('databaseModal').classList.remove('hidden');
+        }
+
+        function closeDatabaseModal() {
+            document.getElementById('databaseModal').classList.add('hidden');
+            document.getElementById('databaseForm').reset();
+        }
+
+        async function addDatabase(e) {
+            e.preventDefault();
+            const form = e.target;
+
+            const config = {
+                host: form.host.value,
+                port: parseInt(form.port.value),
+                database: form.database.value,
+                user: form.user.value,
+                password: form.password.value
+            };
+
+            const data = {
+                db_type: form.db_type.value,
+                config: config,
+                query: form.query.value
+            };
+
+            try {
+                toast('Connexion à la base de données...', 'info');
+                const res = await fetchAPI('/sources/database', 'POST', data);
+
+                if (res.success) {
+                    toast('Base de données connectée avec succès', 'success');
+                    loadSources();
+                    closeDatabaseModal();
+                } else {
+                    toast(res.error, 'error');
+                }
+            } catch (e) {
+                toast('Erreur lors de la connexion', 'error');
+            }
+        }
+
+        async function deleteSource(id) {
+            if (!confirm('Supprimer cette source ?')) return;
+            try {
+                const res = await fetchAPI(`/sources/${id}`, 'DELETE');
+                if (res.success) {
+                    toast('Source supprimée', 'success');
+                    loadSources();
+                }
+            } catch (e) { toast('Erreur', 'error'); }
+        }
+
+        async function archiveSource(id) {
+            try {
+                const res = await fetchAPI(`/sources/${id}/archive`, 'POST');
+                if (res.success) { toast('Source archivée', 'success'); loadSources(); }
+            } catch (e) { toast('Erreur', 'error'); }
+        }
+
+        async function unarchiveSource(id) {
+            try {
+                const res = await fetchAPI(`/sources/${id}/unarchive`, 'POST');
+                if (res.success) { toast('Source désarchivée', 'success'); loadSources(); }
+            } catch (e) { toast('Erreur', 'error'); }
+        }
+
+        function configureArchive(id, currentDays) {
+            const days = prompt("Archivage automatique après combien de jours ? (0 ou vide pour désactiver)", currentDays || "");
+            if (days === null) return;
+
+            const val = (days === "" || days === "0") ? -1 : parseInt(days);
+            updateArchiveSettings(id, val);
+        }
+
+        async function updateArchiveSettings(id, days) {
+            try {
+                let payloadDays = days;
+                if (days === -1) payloadDays = null;
+
+                const res = await fetchAPI(`/sources/${id}/archive-settings`, 'POST', { days: payloadDays });
+                if (res.success) {
+                    toast('Paramètres mis à jour', 'success');
+                    loadSources();
+                } else toast(res.error, 'error');
+            } catch (e) { toast('Erreur', 'error'); }
+        }
+
+        // ============================================================================
+        // CHAT & QUERY WITH VERIFICATION
+        // ============================================================================
+
+        function resize(el) {
+            el.style.height = 'auto';
+            el.style.height = Math.min(el.scrollHeight, 200) + 'px';
+        }
+
+        function handleKey(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                send();
+            }
+        }
+
+        async function send() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+
+            if (!text) return;
+            if (sources.length === 0) return toast('Ajoutez au moins une source', 'error');
+
+            input.disabled = true;
+            document.getElementById('sendBtn').disabled = true;
+
+            addMsg('VOUS', text);
+            input.value = '';
+            input.style.height = 'auto';
+
+            const loadId = addMsg('ASSISTANT', '<div class="typing"><span></span><span></span><span></span></div>');
+
+            try {
+                const res = await fetchAPI('/query', 'POST', { query: text });
+
+                removeMsg(loadId);
+
+                if (res.success) {
+                    console.log('Réponse API reçue:', res);
+                    // AFFICHAGE CORRECT DE LA RÉPONSE
+                    const answerText = (res.answer && res.answer !== 'undefined') ? res.answer : '';
+
+                    addMsg(
+                        'ASSISTANT',
+                        answerText,
+                        res.sources,
+                        res.excerpts,
+                        res.verification,
+                        res.visualization
+                    );
+                } else {
+                    addMsg('ASSISTANT', `Erreur: ${res.error || 'Erreur lors du traitement'}`);
+                }
+            } catch (e) {
+                removeMsg(loadId);
+                addMsg('ASSISTANT', 'Erreur de connexion au serveur');
+                console.error(e);
+            }
+
+            input.disabled = false;
+            document.getElementById('sendBtn').disabled = false;
+            input.focus();
+        }
+
+        // FONCTION ADDMSG CORRIGÉE POUR LE CHAT
+        function addMsg(role, text, sources = null, excerpts = null, verification = null, visualization = null) {
+            const container = document.getElementById('chatMessages');
+            const empty = container.querySelector('.empty');
+            if (empty) empty.remove();
+
+            const id = Date.now().toString() + Math.random().toString(36).substr(2, 5);
+            let sourcesHtml = '';
+            let excerptsHtml = '';
+            let visualizationHtml = '';
+
+            // VISUALISATION DANS LE CHAT AVEC IFRAME - DÉSACTIVÉE
+            // La visualisation automatique a été désactivée car elle ne fonctionne pas correctement
+            // Utilisez l'onglet "Visualisation" pour créer des graphiques
+            /*
+            if (visualization && visualization.html) {
+                visualizationHtml = `
+                    <div class="visualization-container" style="margin-top: 20px;">
+                        <div style="font-size: 13px; font-weight: 600; color: #6b7280; margin-bottom: 12px; padding: 8px 12px; background: #f0f9ff; border-radius: 6px; border-left: 3px solid var(--accent);">
+                            VISUALISATION INTERACTIVE (${visualization.type.toUpperCase()})
+                            ${visualization.auto_generated ? '<span style="background: var(--accent); color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 8px;">AUTO</span>' : ''}
+                        </div>
+                        <iframe 
+                            id="viz-chat-${id}" 
+                            style="width: 100%; border: none; min-height: 700px; border-radius: 8px; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                            sandbox="allow-scripts allow-same-origin allow-downloads"
+                        ></iframe>
+                    </div>
+                `;
+            }
+            */
+
+            if (sources && sources.length > 0) {
+                sourcesHtml = `
+                    <div class="message-sources">
+                        <div class="sources-label">SOURCES UTILISÉES</div>
+                        ${sources.map(s => `<span class="source-chip">${s}</span>`).join('')}
+                    </div>
+                `;
+            }
+
+            if (excerpts && excerpts.length > 0) {
+                excerptsHtml = `
+                    <div class="message-excerpts">
+                        <div class="sources-label">EXTRAITS PERTINENTS</div>
+                        ${excerpts.slice(0, 3).map((e, i) => `
+                            <div class="excerpt-item">
+                                <div class="excerpt-header">Extrait ${i + 1} - ${e.source_name}</div>
+                                <div class="excerpt-text">${truncate(e.text, 200)}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            container.insertAdjacentHTML('beforeend', `
+                <div class="message" id="msg-${id}">
+                    <div class="message-role">${role}</div>
+                    <div class="message-text">${text || ''}</div>
+                    ${sourcesHtml}
+                    ${excerptsHtml}
+                </div>
+            `);
+
+            // INJECTION DU HTML PLOTLY DANS L'IFRAME - DÉSACTIVÉE
+            /*
+            if (visualization && visualization.html) {
+                setTimeout(() => {
+                    const iframe = document.getElementById(`viz-chat-${id}`);
+                    if (iframe) {
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        iframeDoc.open();
+                        iframeDoc.write(visualization.html);
+                        iframeDoc.close();
+                        console.log('Visualisation injectée dans iframe chat');
+                    }
+                }, 100);
+            }
+            */
+
+            scrollToBottom();
+            return id;
+        }
+
+        function removeMsg(id) {
+            document.getElementById(`msg-${id}`)?.remove();
+        }
+
+        function scrollToBottom() {
+            const scroll = document.getElementById('chatScroll');
+            requestAnimationFrame(() => {
+                scroll.scrollTo({
+                    top: scroll.scrollHeight,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // ============================================================================
+        // VISUALIZATION
+        // ============================================================================
+
+        function updateVizSources() {
+            const select = document.getElementById('vizSource');
+            select.innerHTML = '<option value="">Sélectionnez une source</option>';
+
+            sources.filter(s => s.type === 'database' || s.type === 'file').forEach(s => {
+                const option = document.createElement('option');
+                option.value = s.id;
+                option.textContent = `${s.name} (${s.type})`;
+                select.appendChild(option);
+            });
+        }
+
+        // FONCTION GENERATEVISUALIZATION CORRIGÉE
+        async function generateVisualization() {
+            const vizType = document.getElementById('vizType').value;
+            const sourceId = document.getElementById('vizSource').value;
+
+            if (!sourceId) {
+                toast('Sélectionnez une source de données', 'error');
+                return;
+            }
+
+            const canvas = document.getElementById('vizCanvas');
+            canvas.innerHTML = `
+                <div style="text-align:center; padding:60px; color:#9ca3af;">
+                    <div style="font-size:32px; margin-bottom:16px;">V</div>
+                    <div>Génération de la visualisation...</div>
+                </div>
+            `;
+
+            try {
+                const res = await fetchAPI('/visualize', 'POST', {
+                    source_id: sourceId,
+                    chart_type: vizType,
+                    config: { title: `Visualisation ${vizType.toUpperCase()}` }
+                });
+
+                console.log('Réponse API:', res);
+
+                if (res.success && res.html) {
+                    // SOLUTION: Utiliser un iframe pour isoler le HTML Plotly
+                    const iframe = document.createElement('iframe');
+                    iframe.style.width = '100%';
+                    iframe.style.border = 'none';
+                    iframe.style.minHeight = '700px';
+                    iframe.style.background = 'white';
+                    iframe.style.borderRadius = '8px';
+
+                    canvas.innerHTML = '';
+                    canvas.appendChild(iframe);
+
+                    // Injecter le HTML dans l'iframe
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    iframeDoc.open();
+                    iframeDoc.write(res.html);
+                    iframeDoc.close();
+
+                    console.log('Visualisation injectée dans iframe');
+                    toast('Visualisation générée avec succès', 'success');
+
+                } else {
+                    console.error('Erreur API:', res);
+                    canvas.innerHTML = `
+                        <div style="text-align:center; padding:60px;">
+                            <div style="font-size:48px; margin-bottom:16px; color:#ef4444;">X</div>
+                            <div style="color:#ef4444; font-weight:600; margin-bottom:12px;">
+                                Erreur de génération
+                            </div>
+                            <div style="color:#6b7280; font-size:14px;">
+                                ${res.error || 'Impossible de générer la visualisation'}
+                            </div>
+                        </div>
+                    `;
+                    toast(res.error || 'Erreur lors de la génération', 'error');
+                }
+            } catch (e) {
+                console.error('Erreur complète:', e);
+                canvas.innerHTML = `
+                    <div style="text-align:center; padding:60px;">
+                        <div style="font-size:48px; margin-bottom:16px; color:#ef4444;">X</div>
+                        <div style="color:#ef4444; font-weight:600; margin-bottom:12px;">
+                            Erreur de connexion
+                        </div>
+                        <div style="color:#6b7280; font-size:14px;">
+                            ${e.message}
+                        </div>
+                    </div>
+                `;
+                toast('Erreur de connexion', 'error');
+            }
+        }
+
+        // ============================================================================
+        // TABS
+        // ============================================================================
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.getElementById('chatTab').classList.toggle('hidden', tab !== 'chat');
+            document.getElementById('historyTab').classList.toggle('hidden', tab !== 'history');
+            document.getElementById('statsTab').classList.toggle('hidden', tab !== 'stats');
+            document.getElementById('vizTab').classList.toggle('hidden', tab !== 'viz');
+
+            if (tab === 'history') loadHistory();
+            if (tab === 'stats') loadStats();
+            if (tab === 'viz') updateVizSources();
+        }
+
+        // ============================================================================
+        // HISTORY
+        // ============================================================================
+
+        async function loadHistory() {
+            try {
+                const res = await fetchAPI('/history?limit=50');
+                const container = document.getElementById('historyMessages');
+
+                if (res.success && res.history.length > 0) {
+                    container.innerHTML = res.history.map(h => {
+                        const date = new Date(h.timestamp).toLocaleString('fr-FR');
+                        return `
+                            <div class="message">
+                                <div class="message-role">VOUS <span style="color: var(--text-muted); font-weight: 400; margin-left: 10px;">${date}</span></div>
+                                <div class="message-text">${h.query}</div>
+                            </div>
+                            <div class="message">
+                                <div class="message-role">ASSISTANT</div>
+                                <div class="message-text">${h.answer || ''}</div>
+                                ${h.sources_used && h.sources_used.length > 0 ? `
+                                    <div class="message-sources">
+                                        <div class="sources-label">SOURCES</div>
+                                        ${h.sources_used.map(s => `<span class="source-chip">${s}</span>`).join('')}
+                                    </div>
+                                ` : ''}
+                                ${h.excerpts && h.excerpts.length > 0 ? `
+                                    <div class="message-excerpts">
+                                        <div class="sources-label">EXTRAITS</div>
+                                        ${h.excerpts.map((e, i) => `
+                                            <div class="excerpt-item">
+                                                <div class="excerpt-header">Extrait ${i + 1} - ${e.source_name}</div>
+                                                <div class="excerpt-text">${truncate(e.text, 200)}</div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }).join('');
+
+                    document.getElementById('historyScroll').scrollTop = 0;
+                } else {
+                    container.innerHTML = `
+                        <div class="empty">
+                            <div class="empty-icon">H</div>
+                            <div class="empty-title">Aucun historique</div>
+                        </div>
+                    `;
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // ============================================================================
+        // STATISTICS
+        // ============================================================================
+
+        async function loadStats() {
+            try {
+                const res = await fetchAPI('/stats');
+                const grid = document.getElementById('statsGrid');
+                if (res.success) {
+                    const stats = res.stats;
+                    grid.innerHTML = `
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.sources_count}</div>
+                            <div class="stat-label">Sources actives</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.queries_count}</div>
+                            <div class="stat-label">Questions posées</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.avg_response_time}s</div>
+                            <div class="stat-label">Temps de réponse moyen</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">${stats.visualizations_count || 0}</div>
+                            <div class="stat-label">Visualisations générées</div>
+                        </div>
+                    `;
+
+                    if (stats.recent_activity && stats.recent_activity.length > 0) {
+                        const chartHtml = `
+                            <div style="margin-top: 24px; padding: 20px; background: white; border: 1px solid var(--border-light); border-radius: 8px;">
+                                <h3 style="margin-bottom: 16px; font-size: 16px;">Activité des 7 derniers jours</h3>
+                                <div style="display: flex; gap: 8px; align-items: flex-end; height: 200px;">
+                                    ${stats.recent_activity.map(day => {
+                            const maxQueries = Math.max(...stats.recent_activity.map(d => d.queries));
+                            const height = (day.queries / maxQueries) * 100;
+                            return `
+                                             <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                                                 <div style="width: 100%; background: var(--accent); border-radius: 4px 4px 0 0; height: ${height}%; min-height: 5px;"></div>
+                                                 <div style="font-size: 10px; color: var(--text-muted); margin-top: 8px;">${new Date(day.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })}</div>
+                                                 <div style="font-size: 12px; font-weight: 600; color: var(--text-primary);">${day.queries}</div>
+                                             </div>
+                                         `;
+                        }).join('')}
+                                </div>
+                            </div>
+                        `;
+                        document.getElementById('activityChart').innerHTML = chartHtml;
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // ============================================================================
+        // UTILITIES
+        // ============================================================================
+
+        function toast(msg, type = 'info') {
+            const container = document.getElementById('toasts');
+            const el = document.createElement('div');
+            el.className = `toast ${type}`;
+            el.innerHTML = msg;
+            container.appendChild(el);
+            setTimeout(() => el.remove(), 3000);
+        }
+
+        console.log('IA Finder Frontend chargé');
+    </script>
+    
+    <div id="sourceDetailsModal" class="modal-overlay hidden" onclick="if(event.target===this) closeSourceDetailsModal()">
+        <div class="modal">
+            <div class="modal-header">Détails de la source</div>
+            <div class="modal-body" id="sourceDetailsContent"></div>
+            <div class="modal-footer" style="padding: 16px; text-align: right; border-top: 1px solid var(--border-light);">
+                <button class="btn" onclick="closeSourceDetailsModal()">Fermer</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

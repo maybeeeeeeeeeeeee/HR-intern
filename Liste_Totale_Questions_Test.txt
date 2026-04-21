@@ -1,0 +1,65 @@
+LIVRABLE : LISTE EXHAUSTIVE DES QUESTIONS DE TESTS (POUR L'AGENT RH)
+========================================================================
+
+Vous trouverez ci-dessous toutes les questions supportées par la base de données de l'Intelligence Artificielle de votre projet RH interne. Utilisez-les pour évaluer les réponses du Chatbot dans vos "Cas de test clients".
+
+--- CATÉGORIE 1 : CONTRATS & ADMINISTRATION ---
+1. Où puis-je télécharger mon contrat de travail ?
+2. Quelle est la durée de mon période d'essai ?
+3. Comment modifier mon adresse postale ?
+4. Qui est mon responsable hiérarchique N+1 ?
+5. Puis-je obtenir une attestation employeur ?
+6. Je souhaite passer à temps partiel, quelle est la procédure ?
+7. Mon contrat arrive à échéance, que se passe-t-il ?
+8. Je change de poste en interne, mon ancienneté est-elle conservée ?
+
+--- CATÉGORIE 2 : PAIE & RÉMUNÉRATION ---
+9. Quand suis-je payé ?
+10. Où trouver mon bulletin de paie ?
+11. Pourquoi mon salaire net est-il différent ce mois-ci ?
+12. Comment sont calculées mes heures supplémentaires ?
+13. Puis-je recevoir ma paie sur un autre compte bancaire ?
+14. Je n'ai pas reçu ma paie à la date prévue, que faire ?
+15. Mon bulletin de paie comporte une erreur, comment le faire corriger ?
+16. Comment sont calculées mes primes variables ?
+
+--- CATÉGORIE 3 : CONGÉS & ABSENCES ---
+17. Combien de jours de congés me reste-t-il ?
+18. Comment poser un jour de congé ?
+19. Quels sont les jours fériés chômés dans l'entreprise ?
+20. Puis-je poser mes congés en une seule fois ?
+21. Comment déclarer un arrêt maladie ?
+22. Je souhaite poser des congés sans solde, est-ce possible ?
+23. Mon arrêt maladie est prolongé, que dois-je faire ?
+24. Puis-je récupérer des jours de RTT non pris ?
+
+--- CATÉGORIE 4 : AVANTAGES & COMITÉ D'ENTREPRISE ---
+25. Quels sont les avantages proposés par le CSE (Comité Social et Économique) ?
+26. Comment fonctionne la prise en charge de la mutuelle d'entreprise ?
+27. Quelle est la politique de prise en charge des frais de transport ?
+28. Ai-je droit aux Tickets Restaurant ?
+29. Y a-t-il un plan d'épargne entreprise (PEE) ?
+30. Qu'est-ce que le Compte Épargne Temps (CET) ?
+31. L'entreprise offre-t-elle des réductions pour la salle de sport ?
+32. Comment faire une demande d'avance sur salaire ou d'acompte ?
+33. Quelle est la procédure pour la prime de cooptation ?
+
+--- CATÉGORIE 5 : CARRIÈRE & FORMATION ---
+34. Comment puis-je demander une formation interne ou externe ?
+35. Comment utiliser mon Compte Personnel de Formation (CPF) ?
+36. À quelle fréquence ont lieu les entretiens annuels et professionnels ?
+37. Puis-je bénéficier d'un congé de proche aidant ou congé sabbatique ?
+38. Comment fonctionne la mobilité interne (changer de poste, service ou site) ?
+39. Est-ce possible d'obtenir un aménagement du temps de travail (temps partiel thérapeutique ou études) ?
+40. Qui fixe les objectifs lors de la période d'essai et au cours de l'année ?
+41. Quelle est la politique en cas de promotion et d'augmentation salariale ?
+
+--- CATÉGORIE 6 : SÉCURITÉ INFORMATIQUE & LOCAUX ---
+42. Quelle est la politique relative au Télétravail (Charte Télétravail) ?
+43. Que faire si je perds mon badge d'accès aux locaux ?
+44. Quelle est la procédure de sécurité en cas d'incendie (Évacuation) ?
+45. Puis-je utiliser les ressources informatiques pour un usage personnel ?
+46. Ai-je l'autorisation de télécharger des logiciels métiers sans validation du service informatique (DSI) ?
+47. Quelles sont les consignes relatives à la sécurité de l'Information et des Données (RGPD) ?
+48. Puis-je faire rentrer une personne externe (conjoint, visiteur) dans les locaux ?
+49. Comment est gérée la vidéosurveillance sur le site de la société ?

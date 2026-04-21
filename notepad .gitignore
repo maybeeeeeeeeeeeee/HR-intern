@@ -1,0 +1,18 @@
+# secrets
+.env
+backend/.env
+
+# logs
+logs/
+backend/logs/
+
+# databases
+*.db
+backend/data/
+
+# python cache
+__pycache__/
+*.pyc
+
+# vscode
+*.code-workspace

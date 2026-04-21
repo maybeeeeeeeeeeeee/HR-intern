@@ -1,0 +1,23 @@
+Q: Quelle est la politique relative au Télétravail (Charte Télétravail) ?
+R: Conformément à la charte de télétravail en vigueur, les employés éligibles peuvent bénéficier d'un maximum de trois (3) jours de télétravail par semaine. La demande se fait sur le SIRH et doit être approuvée par le manager direct. Une indemnité forfaitaire pour le télétravail de 2,50€ par jour télétravaillé est reversée mensuellement. Le salarié s'engage à disposer d'une connexion internet suffisante et d'un environnement ergonomique.
+
+Q: Que faire si je perds mon badge d'accès aux locaux ?
+R: La perte ou le vol du badge d'accès doit être signalé IMMÉDIATEMENT au service de Sécurité (securite@entreprise.com) et aux Ressources Humaines. L'informatique révoquera votre ancien badge et le secrétariat vous en délivrera un nouveau sous 24h. Les frais de remplacement d'un badge perdu s'élèvent à 15€.
+
+Q: Quelle est la procédure de sécurité en cas d'incendie (Évacuation) ?
+R: En entendant l'alarme sonore discontinue, vous devez immédiatement quitter votre poste de travail sans récupérer vos effets personnels. Utilisez exclusivement les escaliers (aucun ascenseur ne doit être emprunté) et dirigez-vous vers le Point de Rassemblement indiqué sur les plans (Parking Nord et Cour Sud). Des exercices d'évacuation ont lieu deux fois par an.
+
+Q: Puis-je utiliser les ressources informatiques pour un usage personnel ?
+R: La Charte Informatique précise qu'une utilisation ponctuelle et raisonnable des ordinateurs de l'entreprise (navigation internet) à des fins personnelles est tolérée si elle ne porte pas préjudice au travail de l'employé ni à la sécurité du réseau (interdiction de téléchargement de logiciels illégaux, streaming prolongé, cryptomonnaie). Tout achat en ligne piraté depuis une IP de l'entreprise vous engage pénalement.
+
+Q: Ai-je l'autorisation de télécharger des logiciels métiers sans validation du service informatique (DSI) ?
+R: Non, les postes de travail sont verrouillés par des droits d'administrateur. Si vous avez besoin d'un nouveau logiciel, qu'il soit gratuit ou payant, vous devez impérativement passer par le portail du Service Desk Informatique pour soumettre un ticket. Le logiciel devra être audité et approuvé avant d'être installé à distance par un technicien.
+
+Q: Quelles sont les consignes relatives à la sécurité de l'Information et des Données (RGPD) ?
+R: Chaque collaborateur est responsable de la confidentialité. Vous devez systématiquement verrouiller votre écran en quittant votre bureau (Touche Windows + L). Les documents sensibles contenant des informations personnelles (paie, santé, données privées des clients) doivent être enregistrés exclusivement sur les lecteurs partagés sécurisés et non sur votre bureau local. En cas de suspicion de fuite de données, le délégué à la protection des données (DPO) doit être avisé sur-le-champ.
+
+Q: Puis-je faire rentrer une personne externe (conjoint, visiteur) dans les locaux ?
+R: Les personnes externes sont strictement interdites d'accès, sauf raison professionnelle. Les visiteurs doivent s'enregistrer à l'accueil, présenter une pièce d'identité et recevoir un badge "VISITEUR" rouge. Un collaborateur hôte devra impérativement accompagner le visiteur durant l'intégralité de sa présence dans les murs.
+
+Q: Comment est gérée la vidéosurveillance sur le site de la société ?
+R: L'entreprise est équipée de caméras localisées aux entrées/sorties et dans les parkings. Aucune caméra n'est placée dans les bureaux ou les zones de repos. Les images sont conservées pendant un mois strict, conformément aux autorisations de la CNIL. Seuls la police, le directeur sécurité ou un inspecteur du travail assermenté ont l'habilitation légale de visionner ces enregistrements.
