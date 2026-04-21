@@ -1,0 +1,28 @@
+# === Core Web Framework ===
+Flask==3.0.3
+flask-cors==4.0.1
+flask-limiter==3.8.0
+Werkzeug==3.0.4
+
+# === Sécurité & Auth ===
+PyJWT==2.9.0
+cryptography==43.0.1
+python-dotenv==1.0.1
+
+# === Base de données ===
+# SQLite est intégré à Python, pas besoin de dépendance
+
+# === OpenAI (SDK v1+) - CRUCIAL ===
+
+# === Traitement de documents ===
+PyPDF2==3.0.1
+python-docx==1.1.2
+
+
+# === Scheduling & Production ===
+schedule==1.2.2
+gunicorn==23.0.0        # Version 2025, plus stable avec Flask 3
+gevent==24.10.3         # Optionnel mais recommandé avec gunicorn pour perf
+
+# === Utilitaires ===
+python-json-logger==2.0.7   # Logs JSON structurés (fortement recommandé en prod)
